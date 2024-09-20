@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: api-front-end
+  namespace: janus-argocd
+spec:
+  destination:
+    namespace: demo-vm-ossm
+    server: https://kubernetes.default.svc
+  project: janus
+  source:
+    path: k8/deployments/container/manifests
+    repoURL: https://github.com/redhat-na-ssa/ocp-virt-ossm-demo.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
